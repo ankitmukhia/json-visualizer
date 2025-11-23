@@ -13,8 +13,8 @@ export const JsonViewer = ({
   error: null | string;
 }) => {
   const { theme } = useTheme();
-  const currentTheme = theme === "dark" ? "#27272a" : "#f4f4f5";
-  const editorTheme = theme === "dark" ? "ashes" : "bright:inverted";
+  const currentTheme = theme === "light" ? "#f4f4f5" : "#27272a";
+  const editorTheme = theme === "light" ? "bright:inverted" : "ashes";
 
   return (
     <div className="mt-2">
