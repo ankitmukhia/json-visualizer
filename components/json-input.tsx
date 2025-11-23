@@ -1,7 +1,15 @@
 import { useJsonVisuliazerStore } from "@/lib/stores/json-visualizer-store";
-import { Clipboard, Copy, Code, X, TriangleAlertIcon } from "lucide-react";
+import {
+  Clipboard,
+  Copy,
+  Code,
+  X,
+  TriangleAlertIcon,
+  CheckIcon,
+} from "lucide-react";
 import { LoadJson } from "@/components/load-json";
 import { Textarea } from "@/components/ui/textarea";
+import { EditType } from "@/lib/stores/json-visualizer-store";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 
@@ -13,12 +21,20 @@ export const JsonInput = ({
   setJsonInput: (value: string) => void;
 }) => {
   const error = useJsonVisuliazerStore.use.error();
+  const past = useJsonVisuliazerStore.use.past();
+  const copy = useJsonVisuliazerStore.use.copy();
+  const format = useJsonVisuliazerStore.use.format();
+  const removeWhiteSpaces = useJsonVisuliazerStore.use.removeWhiteSpaces();
+  const clear = useJsonVisuliazerStore.use.clear();
+  const editAction = useJsonVisuliazerStore.use.updateEditActions();
+
+  console.log("current past: ", copy);
 
   const handleOnPast = async () => {
     try {
       const clipboardVal = await navigator.clipboard.readText();
       setJsonInput(clipboardVal);
-      toast.success("Json pasted successfully");
+      editAction(EditType.PAST);
     } catch (err) {
       console.log(err);
       toast.error("Faild to past from clipboard");
@@ -28,7 +44,7 @@ export const JsonInput = ({
   const handleOnCopy = async () => {
     try {
       await navigator.clipboard.writeText(jsonInput);
-      toast.success("Json copyed to Clipboard");
+      editAction(EditType.COPY);
     } catch (err) {
       console.log(err);
       toast.error("Faild to Copy from clipboard");
@@ -40,7 +56,7 @@ export const JsonInput = ({
       const convertedObj = JSON.parse(jsonInput);
       const formatData = JSON.stringify(convertedObj, null, 2);
       setJsonInput(formatData);
-      toast.success("Formatted successfully");
+      editAction(EditType.FORMAT);
     } catch (err) {
       console.log(err);
       toast.error("Failed to format.");
@@ -52,7 +68,7 @@ export const JsonInput = ({
       const parsed = JSON.parse(jsonInput);
       const compact = JSON.stringify(parsed);
       setJsonInput(compact);
-      toast.success("Whitespace removed successfully");
+      editAction(EditType.REMOVEWHITESPACES);
     } catch (err) {
       console.log(err);
       toast.error("Invalid JSON: Unable to remove whitespace");
@@ -61,7 +77,7 @@ export const JsonInput = ({
 
   const handleOnClear = () => {
     setJsonInput("");
-    toast.success("Successfully cleared");
+    editAction(EditType.CLEAR);
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -71,24 +87,84 @@ export const JsonInput = ({
   return (
     <div className="flex h-full flex-col">
       <div className="flex flex-wrap flex-row gap-2 py-2">
-        <Button size="sm" variant="secondary" onClick={handleOnPast}>
-          <Clipboard />
-          Past
+        <Button
+          size="sm"
+          variant="secondary"
+          onClick={handleOnPast}
+          className={`${past && "bg-chart-2/40 text-chart-2"}`}
+        >
+          {past ? (
+            <>
+              <CheckIcon /> Pasted
+            </>
+          ) : (
+            <>
+              <Clipboard /> Past
+            </>
+          )}
         </Button>
-        <Button size="sm" onClick={handleOnCopy} variant="secondary">
-          <Copy />
-          Copy
+        <Button
+          size="sm"
+          onClick={handleOnCopy}
+          variant="secondary"
+          className={`${copy && "bg-chart-2/40 text-chart-2"}`}
+        >
+          {copy ? (
+            <>
+              <CheckIcon /> Copied
+            </>
+          ) : (
+            <>
+              <Copy /> Copy
+            </>
+          )}
         </Button>
-        <Button size="sm" onClick={handleOnFormat} variant="secondary">
-          <Code />
-          Format
+        <Button
+          size="sm"
+          onClick={handleOnFormat}
+          variant="secondary"
+          className={`${format && "bg-chart-2/40 text-chart-2"}`}
+        >
+          {format ? (
+            <>
+              <CheckIcon /> Formated
+            </>
+          ) : (
+            <>
+              <Code /> Format
+            </>
+          )}
         </Button>
-        <Button size="sm" onClick={handleOnWhiteSpace} variant="secondary">
-          <X />
-          Remove Whitespace
+        <Button
+          size="sm"
+          onClick={handleOnWhiteSpace}
+          variant="secondary"
+          className={`${removeWhiteSpaces && "bg-chart-2/40 text-chart-2"}`}
+        >
+          {removeWhiteSpaces ? (
+            <>
+              <CheckIcon /> Removed Whitespaces
+            </>
+          ) : (
+            <>
+              <X />
+              Remove Whitespace
+            </>
+          )}
         </Button>
-        <Button size="sm" onClick={handleOnClear} variant="secondary">
-          Clear
+        <Button
+          size="sm"
+          onClick={handleOnClear}
+          variant="secondary"
+          className={`${clear && "bg-chart-2/40 text-chart-2"}`}
+        >
+          {clear ? (
+            <>
+              <CheckIcon /> Cleared
+            </>
+          ) : (
+            <span>Clear</span>
+          )}
         </Button>
 
         <LoadJson loadJsonInput={setJsonInput} />
