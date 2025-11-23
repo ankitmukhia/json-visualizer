@@ -1,4 +1,5 @@
-import { Clipboard, Copy, Code, X } from "lucide-react";
+import { useJsonVisuliazerStore } from "@/lib/stores/json-visualizer-store";
+import { Clipboard, Copy, Code, X, TriangleAlertIcon } from "lucide-react";
 import { LoadJson } from "@/components/load-json";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
@@ -11,6 +12,8 @@ export const JsonInput = ({
   jsonInput: string;
   setJsonInput: (value: string) => void;
 }) => {
+  const error = useJsonVisuliazerStore.use.error();
+
   const handleOnPast = async () => {
     try {
       const clipboardVal = await navigator.clipboard.readText();
@@ -67,55 +70,46 @@ export const JsonInput = ({
 
   return (
     <div className="flex h-full flex-col">
-      <div className="flex flex-row gap-2 py-2">
-        <Button
-          onClick={handleOnPast}
-          variant="outline"
-          className="h-8 text-xs"
-        >
+      <div className="flex flex-wrap flex-row gap-2 py-2">
+        <Button size="sm" variant="secondary" onClick={handleOnPast}>
           <Clipboard />
           Past
         </Button>
-        <Button
-          onClick={handleOnCopy}
-          variant="outline"
-          className="h-8 text-xs"
-        >
+        <Button size="sm" onClick={handleOnCopy} variant="secondary">
           <Copy />
           Copy
         </Button>
-        <Button
-          onClick={handleOnFormat}
-          variant="outline"
-          className="h-8 text-xs"
-        >
+        <Button size="sm" onClick={handleOnFormat} variant="secondary">
           <Code />
           Format
         </Button>
-        <Button
-          onClick={handleOnWhiteSpace}
-          variant="outline"
-          className="h-8 text-xs"
-        >
+        <Button size="sm" onClick={handleOnWhiteSpace} variant="secondary">
           <X />
           Remove Whitespace
         </Button>
-        <Button
-          onClick={handleOnClear}
-          variant="outline"
-          className="h-8 text-xs"
-        >
+        <Button size="sm" onClick={handleOnClear} variant="secondary">
           Clear
         </Button>
 
         <LoadJson loadJsonInput={setJsonInput} />
       </div>
-      <Textarea
-        value={jsonInput}
-        onChange={handleInputChange}
-        className="flex-grow resize-none font-mono"
-        placeholder="Pest your JSON here..."
-      />
+      <div className="relative bg-secondary h-full w-full rounded-bl-md rounded-br-md rounded-tl-md">
+        <Textarea
+          value={jsonInput}
+          onChange={handleInputChange}
+          spellCheck={false}
+          className="flex-grow resize-none font-mono !bg-transparent rounded-none h-full border-none focus-visible:ring-[1.6px] focus-visible:border-none focus-visible:ring-ring/80 rounded-bl-md rounded-br-md rounded-tl-md"
+          placeholder="Pest your JSON here..."
+        />
+
+        {error && jsonInput !== "" && (
+          <div className="absolute bg-yellow-400/20 top-0 right-0 z-10 py-1 px-2 rounded-bl-md transition duration-700 ease-in-out">
+            <div className="flex items-center gap-2 font-light text-yellow-500">
+              <TriangleAlertIcon className="size-4" /> <span>{error}</span>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

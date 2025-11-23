@@ -57,7 +57,7 @@ export const LoadJson = ({
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button variant="outline" className="h-8 text-xs">
+        <Button size="sm" variant="secondary">
           <FileJson />
           Load JSON
         </Button>
@@ -74,7 +74,12 @@ export const LoadJson = ({
           disabled={loading}
         />
         <div className="flex flex-row justify-end">
-          <Button variant="outline" onClick={handleOnSubmit} disabled={loading}>
+          <Button
+            size="sm"
+            variant="outline"
+            onClick={handleOnSubmit}
+            disabled={loading}
+          >
             {loading ? "Loading..." : "Load"}
           </Button>
         </div>
