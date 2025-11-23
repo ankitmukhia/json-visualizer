@@ -28,8 +28,6 @@ export const JsonInput = ({
   const clear = useJsonVisuliazerStore.use.clear();
   const editAction = useJsonVisuliazerStore.use.updateEditActions();
 
-  console.log("current past: ", copy);
-
   const handleOnPast = async () => {
     try {
       const clipboardVal = await navigator.clipboard.readText();
