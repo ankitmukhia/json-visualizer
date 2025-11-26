@@ -11,7 +11,7 @@ export const EditorViewer = () => {
   return (
     <div className="mt-2">
       {error && (
-        <div className="flex items-center bg-secondary gap-2 w-fit py-2 px-2 rounded-md text-sm">
+        <div className="flex items-center bg-primary-foreground gap-2 w-fit py-2 px-2 rounded-md text-sm">
           <TriangleAlert className="size-4" /> {error}
         </div>
       )}

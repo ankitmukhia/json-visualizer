@@ -57,7 +57,7 @@ export const LoadJson = ({
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button size="sm" variant="secondary">
+        <Button size="sm">
           <FileJson />
           Load JSON
         </Button>
@@ -67,19 +67,14 @@ export const LoadJson = ({
           <DialogTitle>Load URl</DialogTitle>
         </DialogHeader>
         <Input
-          className="flex-grow resize-none font-mono"
+          className="grow resize-none font-mono"
           onChange={handleOnChange}
           placeholder="https://api.example.com/data.json"
           onKeyDown={handleKeyDown}
           disabled={loading}
         />
         <div className="flex flex-row justify-end">
-          <Button
-            size="sm"
-            variant="outline"
-            onClick={handleOnSubmit}
-            disabled={loading}
-          >
+          <Button size="sm" onClick={handleOnSubmit} disabled={loading}>
             {loading ? "Loading..." : "Load"}
           </Button>
         </div>

@@ -2,7 +2,7 @@ import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 import { createSelectors } from "./create-selectores";
 
-export type TabValue = "input" | "tree" | "editor";
+export type TabValue = "input" | "tree" | "editor" | "ai";
 export enum EditType {
   PAST = "past",
   COPY = "copy",

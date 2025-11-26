@@ -8,9 +8,10 @@ export function CodeBlock({ children }: { children: string }) {
 
   return (
     <ShikiHighlighter
+      className="code-block"
       language="json"
       showLanguage={false}
-      theme={theme === "light" ? "solarized-light" : "github-dark-dimmed"}
+      theme={theme === "light" ? "solarized-light" : "catppuccin-mocha"}
       showLineNumbers
       addDefaultStyles={false}
       style={{

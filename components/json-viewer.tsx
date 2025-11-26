@@ -13,13 +13,12 @@ export const JsonViewer = ({
   error: null | string;
 }) => {
   const { theme } = useTheme();
-  const currentTheme = theme === "light" ? "#f4f4f5" : "#27272a";
-  const editorTheme = theme === "light" ? "bright:inverted" : "ashes";
+  const editorTheme = theme === "light" ? "bright:inverted" : "chalk";
 
   return (
     <div className="mt-2">
       {error && (
-        <div className="flex items-center bg-secondary gap-2 w-fit py-2 px-2 rounded-md text-sm">
+        <div className="flex items-center bg-red-500 w-fit py-2 px-2 rounded-md text-sm">
           <TriangleAlert className="size-4" /> {error}
         </div>
       )}
@@ -30,10 +29,10 @@ export const JsonViewer = ({
             theme={editorTheme}
             iconStyle="circle"
             style={{
-              backgroundColor: currentTheme,
-              fontSize: 12,
+              backgroundColor: "var(--muted)",
+              fontSize: "var(--font-size-sm)",
               padding: 10,
-              borderRadius: 6,
+              borderRadius: "var(--radius-lg)",
             }}
           />
         </Suspense>

@@ -149,3 +149,71 @@ export const tokyoMoon: TokyoMoonTypes = {
     ],
   },
 };
+
+export const sampleInput = `
+[
+  {
+    "name": "Adeel Solangi",
+    "language": "Sindhi",
+    "id": "V59OF92YF627HFY0",
+    "bio": "Donec lobortis eleifend condimentum. Cras dictum dolor lacinia lectus vehicula rutrum. Maecenas quis nisi nunc. Nam tristique feugiat est vitae mollis. Maecenas quis nisi nunc.",
+    "version": 6.1
+  },
+  {
+    "name": "Napoleon Bonaparte",
+    "era": "Napoleonic Wars",
+    "id": "NAPO001BONA",
+    "bio": "Born in Corsica, Napoleon rose through the ranks of the French military during the French Revolution and became Emperor of the French.",
+    "key_event": "Coup of 18 Brumaire"
+  },
+  {
+    "name": "Napoleon Bonaparte",
+    "era": "First Empire",
+    "id": "NAPO002EMPI",
+    "bio": "His reign was marked by military expansion and significant reforms, including the Napoleonic Code.",
+    "key_event": "Battle of Austerlitz"
+  },
+  {
+    "name": "Napoleon Bonaparte",
+    "era": "Peninsular War",
+    "id": "NAPO003PENS",
+    "bio": "A costly and protracted conflict in Spain and Portugal that drained French resources.",
+    "key_event": "Siege of Zaragoza"
+  },
+  {
+    "name": "Napoleon Bonaparte",
+    "era": "Russian Campaign",
+    "id": "NAPO004RUSS",
+    "bio": "His disastrous invasion of Russia in 1812 led to a significant turning point in the Napoleonic Wars.",
+    "key_event": "Burning of Moscow"
+  },
+  {
+    "name": "Napoleon Bonaparte",
+    "era": "Exile to Elba",
+    "id": "NAPO005ELBA",
+    "bio": "After his defeat by the Sixth Coalition, he was exiled to the island of Elba in 1814.",
+    "key_event": "Treaty of Fontainebleau"
+  },
+  {
+    "name": "Napoleon Bonaparte",
+    "era": "Hundred Days",
+    "id": "NAPO006HUND",
+    "bio": "He escaped from Elba in 1815 and briefly returned to power, known as the Hundred Days.",
+    "key_event": "Escape from Elba"
+  },
+  {
+    "name": "Napoleon Bonaparte",
+    "era": "Battle of Waterloo",
+    "id": "NAPO007WATE",
+    "bio": "His final defeat came at the Battle of Waterloo against a coalition led by the Duke of Wellington.",
+    "key_event": "Battle of Waterloo"
+  },
+  {
+    "name": "Napoleon Bonaparte",
+    "era": "Exile to St. Helena",
+    "id": "NAPO008HELE",
+    "bio": "He was exiled to the remote island of St. Helena, where he died in 1821.",
+    "key_event": "Death on St. Helena"
+  }
+]
+`;

@@ -87,9 +87,8 @@ export const JsonInput = ({
       <div className="flex flex-wrap flex-row gap-2 py-2">
         <Button
           size="sm"
-          variant="secondary"
           onClick={handleOnPast}
-          className={`${past && "bg-chart-2/40 text-chart-2"}`}
+          className={`${past && "bg-chart-1/40 text-chart-1"}`}
         >
           {past ? (
             <>
@@ -104,8 +103,7 @@ export const JsonInput = ({
         <Button
           size="sm"
           onClick={handleOnCopy}
-          variant="secondary"
-          className={`${copy && "bg-chart-2/40 text-chart-2"}`}
+          className={`${copy && "bg-chart-1/40 text-chart-1"}`}
         >
           {copy ? (
             <>
@@ -120,8 +118,7 @@ export const JsonInput = ({
         <Button
           size="sm"
           onClick={handleOnFormat}
-          variant="secondary"
-          className={`${format && "bg-chart-2/40 text-chart-2"}`}
+          className={`${format && "bg-chart-1/40 text-chart-1"}`}
         >
           {format ? (
             <>
@@ -136,8 +133,7 @@ export const JsonInput = ({
         <Button
           size="sm"
           onClick={handleOnWhiteSpace}
-          variant="secondary"
-          className={`${removeWhiteSpaces && "bg-chart-2/40 text-chart-2"}`}
+          className={`${removeWhiteSpaces && "bg-chart-1/20 text-chart-1"}`}
         >
           {removeWhiteSpaces ? (
             <>
@@ -153,8 +149,7 @@ export const JsonInput = ({
         <Button
           size="sm"
           onClick={handleOnClear}
-          variant="secondary"
-          className={`${clear && "bg-chart-2/40 text-chart-2"}`}
+          className={`${clear && "bg-chart-1/40 text-chart-1"}`}
         >
           {clear ? (
             <>
@@ -167,12 +162,12 @@ export const JsonInput = ({
 
         <LoadJson loadJsonInput={setJsonInput} />
       </div>
-      <div className="relative bg-secondary h-full w-full rounded-bl-md rounded-br-md rounded-tl-md">
+      <div className="relative bg-muted rounded-lg h-full w-full">
         <Textarea
           value={jsonInput}
           onChange={handleInputChange}
           spellCheck={false}
-          className="flex-grow resize-none font-mono !bg-transparent rounded-none h-full border-none focus-visible:ring-[1.6px] focus-visible:border-none focus-visible:ring-ring/80 rounded-bl-md rounded-br-md rounded-tl-md"
+          className="grow resize-none font-mono bg-transparent dark:bg-transparent rounded-none h-full border-none focus-visible:ring-[1.6px] focus-visible:border-none focus-visible:ring-ring/80 rounded-bl-md rounded-br-md rounded-tl-md"
           placeholder="Pest your JSON here..."
         />
 

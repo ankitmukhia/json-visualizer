@@ -10,6 +10,7 @@ import { JsonViewer } from "@/components/json-viewer";
 import { EditorViewer } from "@/components/editor-viewer";
 import { ModeToggle } from "@/components/mode-toggle";
 import { JsonInput } from "@/components/json-input";
+import { AiViewer } from "@/components/ai-viewer";
 
 export const DisplayJson = () => {
   const activeTab = useJsonVisuliazerStore.use.activeTab();
@@ -42,45 +43,35 @@ export const DisplayJson = () => {
       <Tabs
         defaultValue={activeTab}
         onValueChange={(value) => setActiveTab(value as TabValue)}
-        className="flex-grow flex flex-col p-4"
+        className="grow flex flex-col p-4"
       >
-        <div className="flex flex-grow flex-col">
+        <div className="flex grow flex-col">
           <div className="flex flex-row justify-between">
-            <TabsList className="bg-muted w-xs rounded-md">
-              <TabsTrigger
-                value="input"
-                className="dark:data-[state=active]:border-input/10"
-              >
-                Input
-              </TabsTrigger>
-              <TabsTrigger
-                value="tree"
-                className="dark:data-[state=active]:border-input/10"
-              >
-                Tree
-              </TabsTrigger>
-              <TabsTrigger
-                value="editor"
-                className="dark:data-[state=active]:border-input/10"
-              >
-                Editor
-              </TabsTrigger>
+            <TabsList className="w-sm h-11">
+              <TabsTrigger value="input">Input</TabsTrigger>
+              <TabsTrigger value="tree">Tree</TabsTrigger>
+              <TabsTrigger value="editor">Code View</TabsTrigger>
+              <TabsTrigger value="ai">Ask ai</TabsTrigger>
             </TabsList>
 
             <ModeToggle />
           </div>
 
-          <div className="flex flex-grow flex-col">
-            <TabsContent value="input" className="flex-grow">
+          <div className="flex grow flex-col">
+            <TabsContent value="input" className="grow">
               <JsonInput jsonInput={jsonInput} setJsonInput={handleJsonInput} />
             </TabsContent>
 
-            <TabsContent value="tree" className="flex-grow">
+            <TabsContent value="tree" className="grow">
               <JsonViewer jsonInput={jsonParsed} error={error} />
             </TabsContent>
 
-            <TabsContent value="editor" className="flex-grow">
+            <TabsContent value="editor" className="grow">
               <EditorViewer />
+            </TabsContent>
+
+            <TabsContent value="ai" className="grow">
+              <AiViewer />
             </TabsContent>
           </div>
         </div>
