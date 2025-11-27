@@ -36,7 +36,7 @@ interface JsonAction {
 const useJsonStoreBase = create<JsonInitialState & JsonAction>()(
   persist(
     (set) => ({
-      activeTab: "input",
+      activeTab: "ai",
       jsonInput: "",
       jsonParsed: null,
       error: null,
