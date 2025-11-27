@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button";
 
 export const EditorViewer = () => {
 	const { theme } = useTheme();
-	const defaultTheme = theme === "light" ? "solarized-light" : "kanagawa-dragon";
+	const defaultTheme = theme === "light" ? "github-light-default" : "kanagawa-dragon";
 	const [isOpen, setIsOpen] = useState(false);
 	const [currentTheme, setCurrentTheme] = useState(defaultTheme);
 	const themeItemsRef = useRef<Array<HTMLDivElement | null>>([]);
@@ -33,7 +33,11 @@ export const EditorViewer = () => {
 				return () => clearTimeout(scrollTimeout);
 			}
 		}
-	}, [isOpen, currentTheme]);
+	}, [isOpen]);
+
+	useEffect(() => {
+		setCurrentTheme(defaultTheme);
+	}, [theme]);
 
 	const jsonInput = useJsonVisuliazerStore.use.jsonInput();
 	const error = useJsonVisuliazerStore.use.error();

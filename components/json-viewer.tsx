@@ -45,7 +45,11 @@ export const JsonViewer = ({
 				}
 			}
 		}
-	}, [isOpen, currentTheme])
+	}, [isOpen])
+
+	useEffect(() => {
+		setCurrentTheme(editorTheme);
+	}, [theme])
 
 	const handleShuffleTheme = () => {
 		const randomTheme = rjvThemes[Math.floor(Math.random() * rjvThemes.length)];

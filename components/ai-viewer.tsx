@@ -35,20 +35,6 @@ export const AiViewer = () => {
 	const [instruction, setInstruction] = useState("");
 	const [showAskInput, setShowAskInput] = useState(false);
 
-	useEffect(() => {
-		function detectMobileSizeScreen() {
-			const screenWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-			return screenWidth < 768 ? setIsMobile(true) : setIsMobile(false);
-		}
-
-		detectMobileSizeScreen();
-
-		window.addEventListener("resize", detectMobileSizeScreen);
-		return () => {
-			window.removeEventListener("resize", detectMobileSizeScreen);
-		};
-	}, [])
-
 	const codeToHighlight = useMemo(() => {
 		if (!messages.length) return currentJson;
 
@@ -66,7 +52,7 @@ export const AiViewer = () => {
 	const highlightedCode = useShikiHighlighter(
 		codeToHighlight,
 		"json",
-		"catppuccin-mocha",
+		"kanagawa-dragon",
 		{
 			showLineNumbers: true,
 			defaultColor: false,
@@ -109,7 +95,20 @@ export const AiViewer = () => {
 		sendMessage({ text: content });
 		setShowAskInput(false);
 		setInstruction("");
-	}
+	};
+
+	useEffect(() => {
+		function detectMobileSizeScreen() {
+			const screenWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+			return screenWidth < 768 ? setIsMobile(true) : setIsMobile(false);
+		}
+		detectMobileSizeScreen();
+
+		window.addEventListener("resize", detectMobileSizeScreen);
+		return () => {
+			window.removeEventListener("resize", detectMobileSizeScreen);
+		};
+	}, [])
 
 	useEffect(() => {
 		if (highlightRef.current && textareaRef.current) {
@@ -140,7 +139,7 @@ export const AiViewer = () => {
 		return {
 			maxSize: 90,
 		};
-	}
+	};
 
 	const aiViewPanelProps = (): PanelProps => {
 		if (!isMobile) {
@@ -153,10 +152,9 @@ export const AiViewer = () => {
 		return {
 			maxSize: 10,
 		};
-	}
+	};
 
-	const commonStyles =
-		"absolute inset-0 w-full h-full no-scrollbar font-mono leading-relaxed border-0 m-0 box-border whitespace-pre overflow-auto";
+	const commonStyles = "absolute inset-0 w-full h-full no-scrollbar font-mono leading-relaxed border-0 m-0 box-border whitespace-pre overflow-auto";
 
 	return (
 		<div className="relative flex h-full flex-col mt-2">
@@ -166,9 +164,11 @@ export const AiViewer = () => {
 						"relative h-full bg-muted border-2 border-input rounded-lg",
 						status === "submitted" && "pointer-events-none"
 					)}>
-						<div className="absolute inset-0 z-100 flex items-center justify-center bg-black/50 cursor-not-allowed pointer-events-none">
-							Generating...
-						</div>
+						{status === "submitted" && (
+							<div className="absolute inset-0 z-100 flex items-center justify-center bg-black/50 cursor-not-allowed pointer-events-none">
+								Generating...
+							</div>
+						)}
 
 						<div
 							ref={highlightRef}
@@ -234,11 +234,11 @@ export const AiViewer = () => {
 					<div className="bg-linear-to-t from-background via-accent to-background h-full w-[2px]" />
 				</PanelResizeHandle>
 
-				<Panel {...aiViewPanelProps()} className="px-2">
+				<Panel {...aiViewPanelProps()} className="p-1">
 					<div className="flex items-center gap-1 justify-center w-full h-full">
-						<Textarea
-							placeholder="Ask me..."
-							className="resize-none h-full md:h-[60px] dark:bg-muted bg-background no-scrollbar border-none focus:outline-none rounded-md focus-visible:ring-[1.6px] focus-visible:border-none focus-visible:ring-ring/80"
+						<textarea
+							placeholder="What do you want me to do?"
+							className="w-full px-3 py-2 shadow-sm resize-none h-full md:h-[60px] rounded-lg no-scrollbar outline-2 outline-ring/80 focus-visible:ring-0 text-sm placeholder:text-muted-foreground"
 							onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
 								setInstruction(e.target.value)
 							}
@@ -246,7 +246,7 @@ export const AiViewer = () => {
 						/>
 						<Button
 							size="icon"
-							className="h-full md:h-[60px] w-12"
+							className="h-full md:h-[55px] w-12"
 							onClick={handleOnSubmit}
 						>
 							<ArrowUpIcon className="size-6" />
