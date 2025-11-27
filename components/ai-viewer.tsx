@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useCallback, useEffect, useMemo } from "react";
-import { ArrowUpIcon } from "lucide-react";
+import { ArrowUpIcon, Loader2 } from "lucide-react";
 import { useShikiHighlighter } from "react-shiki";
 import { sampleInput } from "@/constants/tokyo-moon";
 import { Textarea } from "@/components/ui/textarea";
@@ -17,7 +17,7 @@ import {
 } from "react-resizable-panels";
 
 export const AiViewer = () => {
-	const { messages, sendMessage } = useChat({
+	const { messages, sendMessage, status } = useChat({
 		transport: new DefaultChatTransport({
 			api: "/api/json",
 		}),
@@ -106,7 +106,9 @@ export const AiViewer = () => {
 
 	const handleOnSubmit = () => {
 		const content = `Given this JSON: ${currentJson}\n\nInstruction: ${instruction}`;
-		sendMessage({ text: content })
+		sendMessage({ text: content });
+		setShowAskInput(false);
+		setInstruction("");
 	}
 
 	useEffect(() => {
@@ -160,7 +162,14 @@ export const AiViewer = () => {
 		<div className="relative flex h-full flex-col mt-2">
 			<PanelGroup direction={isMobile ? "vertical" : "horizontal"} className="h-full w-full rounded-lg gap-2">
 				<Panel {...jsonViewPanelProps()}>
-					<div className="relative h-full bg-muted border-2 border-input rounded-lg">
+					<div className={cn(
+						"relative h-full bg-muted border-2 border-input rounded-lg",
+						status === "submitted" && "pointer-events-none"
+					)}>
+						<div className="absolute inset-0 z-100 flex items-center justify-center bg-black/50 cursor-not-allowed pointer-events-none">
+							Generating...
+						</div>
+
 						<div
 							ref={highlightRef}
 							className={cn(
@@ -233,6 +242,7 @@ export const AiViewer = () => {
 							onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
 								setInstruction(e.target.value)
 							}
+							spellCheck={false}
 						/>
 						<Button
 							size="icon"
