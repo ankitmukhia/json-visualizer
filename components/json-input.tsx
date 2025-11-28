@@ -11,6 +11,7 @@ import { LoadJson } from "@/components/load-json";
 import { Textarea } from "@/components/ui/textarea";
 import { EditType } from "@/lib/stores/json-visualizer-store";
 import { Button } from "@/components/ui/button";
+import { sampleInput } from "@/constants/tokyo-moon";
 import { toast } from "sonner";
 
 export const JsonInput = ({
@@ -161,6 +162,13 @@ export const JsonInput = ({
         </Button>
 
         <LoadJson loadJsonInput={setJsonInput} />
+
+        <button
+          className="text-sm border border-dashed border-muted-foreground/40 h-8 px-3 hover:bg-muted"
+          onClick={() => setJsonInput(sampleInput.trim())}
+        >
+          OR Load Example JSON
+        </button>
       </div>
       <div className="relative bg-muted rounded-lg h-full w-full">
         <Textarea

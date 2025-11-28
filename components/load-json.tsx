@@ -62,9 +62,11 @@ export const LoadJson = ({
           Load JSON
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className="bg-card borde sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>Load URl</DialogTitle>
+          <DialogTitle>
+            <p className="font-thin text-md">Load URL</p>
+          </DialogTitle>
         </DialogHeader>
         <Input
           className="grow resize-none font-mono"
@@ -74,7 +76,7 @@ export const LoadJson = ({
           disabled={loading}
         />
         <div className="flex flex-row justify-end">
-          <Button size="sm" onClick={handleOnSubmit} disabled={loading}>
+          <Button className="w-1/3" onClick={handleOnSubmit} disabled={loading}>
             {loading ? "Loading..." : "Load"}
           </Button>
         </div>

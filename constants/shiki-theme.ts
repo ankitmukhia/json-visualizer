@@ -86,6 +86,5 @@ export const shikiThemes = [
 
   { label: "Vitesse Black", value: "vitesse-black" },
   { label: "Vitesse Dark", value: "vitesse-dark" },
-  { label: "Vitesse Light", value: "vitesse-light" }
+  { label: "Vitesse Light", value: "vitesse-light" },
 ];
-

@@ -46,12 +46,12 @@ export const DisplayJson = () => {
         className="grow flex flex-col p-4"
       >
         <div className="flex grow flex-col">
-          <div className="flex flex-row justify-between">
+          <div className="flex flex-row items-center justify-between">
             <TabsList className="w-sm h-11">
               <TabsTrigger value="input">Input</TabsTrigger>
               <TabsTrigger value="tree">Tree</TabsTrigger>
               <TabsTrigger value="editor">Code View</TabsTrigger>
-              <TabsTrigger value="ai">Ask ai</TabsTrigger>
+              <TabsTrigger value="ai">Ask AI</TabsTrigger>
             </TabsList>
 
             <ModeToggle />
